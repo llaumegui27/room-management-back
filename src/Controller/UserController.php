@@ -33,6 +33,29 @@ class UserController extends AbstractController
         return $this->json($responseData);
     }
 
+    #[Route('/user/{id}', name: 'user', methods: ['GET'])]
+    public function userById(UserRepository $userRepository, $id): Response
+    {
+        if (!$userRepository->find($id)) {
+            throw $this->createNotFoundException(
+                'No user found with id : '.$id
+            );
+        }
+
+        $user = $userRepository->find($id);
+        $responseData[] = [
+            'id' => $user->getId(),
+            'name' => $user->getName(),
+            'email' => $user->getMail(),
+            'password' => $user->getPassword(),
+            'teacher' => $user->isTeacher(),
+            'admin' => $user->isAdmin(),
+            'super_admin' => $user->isSuperAdmin()
+        ];
+
+        return $this->json($responseData);
+    }
+
     #[Route('/add-user', name: 'add_user', methods: ['POST'])]
     public function addUser(Request $request, ManagerRegistry $doctrine): Response
     {

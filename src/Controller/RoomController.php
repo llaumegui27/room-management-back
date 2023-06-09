@@ -24,10 +24,30 @@ class RoomController extends AbstractController
                 'name' => $room->getName(),
                 'subject' => $room->getSubject(),
                 'places' => $room->getPlaces(),
-                'participants' => $room->getParticipants(),
-
+                'participants' => $room->getParticipants()
             ];
         }
+        return $this->json($responseData);
+    }
+
+    #[Route('/room/{id}', name: 'room', methods: ['GET'])]
+    public function roomById(RoomRepository $roomRepository, $id): Response
+    {
+        if (!$roomRepository->find($id)) {
+            throw $this->createNotFoundException(
+                'No room found with id : '.$id
+            );
+        }
+
+        $room = $roomRepository->find($id);
+        $responseData[] = [
+            'id' => $room->getId(),
+            'name' => $room->getName(),
+            'subject' => $room->getSubject(),
+            'places' => $room->getPlaces(),
+            'participants' => $room->getParticipants()
+        ];
+
         return $this->json($responseData);
     }
 
