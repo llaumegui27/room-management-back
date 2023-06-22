@@ -93,4 +93,30 @@ class UserController extends AbstractController
 
         return $this->json(['message' => "Utilisateur : $id supprimé."], Response::HTTP_OK);
     }
+
+    #[Route('/update-user/{id}', name: 'update_user', methods: ['PUT'])]
+    public function updateUser(int $id, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $userRepository = $entityManager->getRepository(User::class);
+
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur introuvable.');
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $user->setName($data['name']);
+        $user->setMail($data['mail']);
+        $user->setPassword($data['password']);
+        $user->setTeacher($data['teacher']);
+        $user->setAdmin($data['admin']);
+        $user->setSuperAdmin($data['super_admin']);
+
+        $entityManager->flush();
+
+        return $this->json($user, Response::HTTP_OK);
+    }
 }

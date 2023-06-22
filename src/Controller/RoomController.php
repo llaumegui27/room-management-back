@@ -86,4 +86,28 @@ class RoomController extends AbstractController
 
         return $this->json(['message' => "Salle : $id supprimé."], Response::HTTP_OK);
     }
+
+    #[Route('/update-room/{id}', name: 'update_room', methods: ['PUT'])]
+    public function updateRoom(int $id, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $roomRepository = $entityManager->getRepository(Room::class);
+
+        $room = $roomRepository->find($id);
+
+        if (!$room) {
+            throw $this->createNotFoundException('Salle introuvable.');
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $room->setName($data['name']);
+        $room->setSubject($data['subject']);
+        $room->setPlaces($data['places']);
+        $room->setParticipants($data['participants']);
+
+        $entityManager->flush();
+
+        return $this->json($room, Response::HTTP_OK);
+    }
 }

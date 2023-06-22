@@ -391,7 +391,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.2acNLzi"/>
+      <argument type="service" id=".service_locator.0o9RK_I"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2950,7 +2950,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.2acNLzi"/>
+      <argument type="service" id=".service_locator.0o9RK_I"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -6892,19 +6892,22 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.2acNLzi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0o9RK_I" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ReservationController::addReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController::deleteReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController::reservationById" type="service_closure" id=".service_locator.caJHb8S"/>
         <argument key="App\Controller\ReservationController::reservations" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::updateReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController::addRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController::deleteRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController::roomById" type="service_closure" id=".service_locator.0.E_r2b"/>
         <argument key="App\Controller\RoomController::rooms" type="service_closure" id=".service_locator.0.E_r2b"/>
+        <argument key="App\Controller\RoomController::updateRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController::addUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController::deleteUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\UserController::updateUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController::userById" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\UserController::users" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -6915,12 +6918,15 @@
         <argument key="App\Controller\ReservationController:deleteReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController:reservationById" type="service_closure" id=".service_locator.caJHb8S"/>
         <argument key="App\Controller\ReservationController:reservations" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:updateReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController:addRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController:deleteRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController:roomById" type="service_closure" id=".service_locator.0.E_r2b"/>
         <argument key="App\Controller\RoomController:rooms" type="service_closure" id=".service_locator.0.E_r2b"/>
+        <argument key="App\Controller\RoomController:updateRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController:addUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController:deleteUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\UserController:updateUser" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\UserController:userById" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\UserController:users" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -8881,7 +8887,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.2acNLzi"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.0o9RK_I"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8902,7 +8908,7 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
-    <service id=".service_locator.6s2IMQb" alias=".service_locator.2acNLzi"/>
+    <service id=".service_locator.z3eVFzs" alias=".service_locator.0o9RK_I"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>

@@ -49,7 +49,16 @@ return [
                     .')'
                     .'|user/([^/]++)(*:299)'
                 .')'
-                .'|/user/([^/]++)(*:322)'
+                .'|/u(?'
+                    .'|pdate\\-(?'
+                        .'|r(?'
+                            .'|eservation/([^/]++)(*:346)'
+                            .'|oom/([^/]++)(*:366)'
+                        .')'
+                        .'|user/([^/]++)(*:388)'
+                    .')'
+                    .'|ser/([^/]++)(*:409)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -65,7 +74,10 @@ return [
         257 => [[['_route' => 'delete_reservation', '_controller' => 'App\\Controller\\ReservationController::deleteReservation'], ['id'], ['DELETE' => 0], null, false, true, null]],
         277 => [[['_route' => 'delete_room', '_controller' => 'App\\Controller\\RoomController::deleteRoom'], ['id'], ['DELETE' => 0], null, false, true, null]],
         299 => [[['_route' => 'delete_user', '_controller' => 'App\\Controller\\UserController::deleteUser'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        322 => [
+        346 => [[['_route' => 'update-reservation', '_controller' => 'App\\Controller\\ReservationController::updateReservation'], ['id'], ['PUT' => 0], null, false, true, null]],
+        366 => [[['_route' => 'update_room', '_controller' => 'App\\Controller\\RoomController::updateRoom'], ['id'], ['PUT' => 0], null, false, true, null]],
+        388 => [[['_route' => 'update_user', '_controller' => 'App\\Controller\\UserController::updateUser'], ['id'], ['PUT' => 0], null, false, true, null]],
+        409 => [
             [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::userById'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

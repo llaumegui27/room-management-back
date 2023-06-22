@@ -102,4 +102,34 @@ class ReservationController extends AbstractController
 
         return $this->json(['message' => "Réservation : $id supprimé."], Response::HTTP_OK);
     }
+
+    #[Route('/update-reservation/{id}', name: 'update-reservation', methods: ['PUT'])]
+    public function updateReservation(Request $request, ManagerRegistry $doctrine, $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $data = json_decode($request->getContent(), true);
+
+        $reservation = $entityManager->getRepository(Reservation::class)->find($id);
+
+        if (!$reservation) {
+            throw $this->createNotFoundException('Réservation non trouvée.');
+        }
+
+        $idUser = $entityManager->getRepository(User::class)->find($data['id_user_id']);
+        $idRoom = $entityManager->getRepository(Room::class)->find($data['id_room_id']);
+
+        $dateHeureDebut = new DateTimeImmutable($data['date_heure_debut']);
+        $dateHeureFin = new DateTimeImmutable($data['date_heure_fin']);
+
+        $reservation->setIdUser($idUser);
+        $reservation->setIdRoom($idRoom);
+        $reservation->setDateHeureDebut($dateHeureDebut);
+        $reservation->setDateHeureFin($dateHeureFin);
+        $reservation->setEtat($data['etat']);
+
+        $entityManager->flush();
+
+        return $this->json($reservation, Response::HTTP_OK);
+    }
+
 }
