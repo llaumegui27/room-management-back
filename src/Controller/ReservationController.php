@@ -30,9 +30,32 @@ class ReservationController extends AbstractController
                 'date_heure_debut' => $reservation->getDateHeureDebut(),
                 'date_heure_fin' => $reservation->getDateHeureFin(),
                 'id_user_id' => $reservation->getIdUser()->getId(),
-                'id_room_id' => $reservation->getIdRoom()->getId()
+                'id_room_id' => $reservation->getIdRoom()->getId(),
+                'etat' => $reservation->isEtat()
             ];
         }
+        return $this->json($responseData);
+    }
+
+    #[Route('/reservation/{id}', name: 'reservation', methods: ['GET'])]
+    public function reservationById(ReservationRepository $reservationRepository, $id): Response
+    {
+        if (!$reservationRepository->find($id)) {
+            throw $this->createNotFoundException(
+                'No reservation found with id : '.$id
+            );
+        }
+
+        $reservation = $reservationRepository->find($id);
+        $responseData[] = [
+            'id' => $reservation->getId(),
+            'date_heure_debut' => $reservation->getDateHeureDebut(),
+            'date_heure_fin' => $reservation->getDateHeureFin(),
+            'id_user_id' => $reservation->getIdUser()->getId(),
+            'id_room_id' => $reservation->getIdRoom()->getId(),
+            'etat' => $reservation->isEtat()
+        ];
+
         return $this->json($responseData);
     }
 
