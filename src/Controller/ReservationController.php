@@ -81,7 +81,25 @@ class ReservationController extends AbstractController
 
         $entityManager->persist($reservation);
         $entityManager->flush();
-        //return new JsonResponse('success');
         return $this->json($reservation, Response::HTTP_OK);
+        //return new JsonResponse('success');
+    }
+
+    #[Route('/delete-reservation/{id}', name: 'delete_reservation', methods: ['DELETE'])]
+    public function deleteReservation(int $id, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $reservationRepository = $entityManager->getRepository(Reservation::class);
+
+        $reservation = $reservationRepository->find($id);
+
+        if (!$reservation) {
+            throw $this->createNotFoundException('Réservation introuvable.');
+        }
+
+        $entityManager->remove($reservation);
+        $entityManager->flush();
+
+        return $this->json(['message' => "Réservation : $id supprimé."], Response::HTTP_OK);
     }
 }

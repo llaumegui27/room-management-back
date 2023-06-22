@@ -19,10 +19,13 @@ return [
     'reservations' => [[], ['_controller' => 'App\\Controller\\ReservationController::reservations'], [], [['text', '/reservations']], [], [], []],
     'reservation' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::reservationById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/reservation']], [], [], []],
     'add-reservation' => [[], ['_controller' => 'App\\Controller\\ReservationController::addReservation'], [], [['text', '/add-reservation']], [], [], []],
+    'delete_reservation' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::deleteReservation'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/delete-reservation']], [], [], []],
     'rooms' => [[], ['_controller' => 'App\\Controller\\RoomController::rooms'], [], [['text', '/rooms']], [], [], []],
     'room' => [['id'], ['_controller' => 'App\\Controller\\RoomController::roomById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/room']], [], [], []],
     'add-room' => [[], ['_controller' => 'App\\Controller\\RoomController::addRoom'], [], [['text', '/add-room']], [], [], []],
+    'delete_room' => [['id'], ['_controller' => 'App\\Controller\\RoomController::deleteRoom'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/delete-room']], [], [], []],
     'users' => [[], ['_controller' => 'App\\Controller\\UserController::users'], [], [['text', '/users']], [], [], []],
     'user' => [['id'], ['_controller' => 'App\\Controller\\UserController::userById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
     'add_user' => [[], ['_controller' => 'App\\Controller\\UserController::addUser'], [], [['text', '/add-user']], [], [], []],
+    'delete_user' => [['id'], ['_controller' => 'App\\Controller\\UserController::deleteUser'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/delete-user']], [], [], []],
 ];

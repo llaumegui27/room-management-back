@@ -68,4 +68,22 @@ class RoomController extends AbstractController
         return $this->json($room, Response::HTTP_OK);
 
     }
+
+    #[Route('/delete-room/{id}', name: 'delete_room', methods: ['DELETE'])]
+    public function deleteRoom(int $id, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $roomRepository = $entityManager->getRepository(Room::class);
+
+        $room = $roomRepository->find($id);
+
+        if (!$room) {
+            throw $this->createNotFoundException('Salle introuvable.');
+        }
+
+        $entityManager->remove($room);
+        $entityManager->flush();
+
+        return $this->json(['message' => "Salle : $id supprimé."], Response::HTTP_OK);
+    }
 }

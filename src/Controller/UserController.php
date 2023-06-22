@@ -75,4 +75,22 @@ class UserController extends AbstractController
         return $this->json($user, Response::HTTP_OK);
 
     }
+
+    #[Route('/delete-user/{id}', name: 'delete_user', methods: ['DELETE'])]
+    public function deleteUser(int $id, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $userRepository = $entityManager->getRepository(User::class);
+
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur introuvable.');
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->json(['message' => "Utilisateur : $id supprimé."], Response::HTTP_OK);
+    }
 }

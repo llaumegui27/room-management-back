@@ -42,7 +42,14 @@ return [
                     .'|eservation/([^/]++)(*:193)'
                     .'|oom/([^/]++)(*:213)'
                 .')'
-                .'|/user/([^/]++)(*:236)'
+                .'|/delete\\-(?'
+                    .'|r(?'
+                        .'|eservation/([^/]++)(*:257)'
+                        .'|oom/([^/]++)(*:277)'
+                    .')'
+                    .'|user/([^/]++)(*:299)'
+                .')'
+                .'|/user/([^/]++)(*:322)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -55,7 +62,10 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         193 => [[['_route' => 'reservation', '_controller' => 'App\\Controller\\ReservationController::reservationById'], ['id'], ['GET' => 0], null, false, true, null]],
         213 => [[['_route' => 'room', '_controller' => 'App\\Controller\\RoomController::roomById'], ['id'], ['GET' => 0], null, false, true, null]],
-        236 => [
+        257 => [[['_route' => 'delete_reservation', '_controller' => 'App\\Controller\\ReservationController::deleteReservation'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        277 => [[['_route' => 'delete_room', '_controller' => 'App\\Controller\\RoomController::deleteRoom'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        299 => [[['_route' => 'delete_user', '_controller' => 'App\\Controller\\UserController::deleteUser'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        322 => [
             [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::userById'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
