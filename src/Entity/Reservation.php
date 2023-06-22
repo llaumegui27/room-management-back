@@ -23,10 +23,10 @@ class Reservation
     #[ORM\Column]
     private ?bool $etat = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userReservation')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'roomReservation')]
     private ?User $idUser = null;
 
-    #[ORM\ManyToOne(inversedBy: 'roomReservation')]
+    #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'userReservation')]
     private ?Room $idRoom = null;
 
     public function getId(): ?int
@@ -93,4 +93,5 @@ class Reservation
 
         return $this;
     }
+    
 }

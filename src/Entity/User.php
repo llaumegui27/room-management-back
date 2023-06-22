@@ -33,7 +33,6 @@ class User
     #[ORM\Column(nullable: true)]
     private ?bool $superAdmin = null;
 
-    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Reservation::class)]
     private Collection $userReservation;
 
     public function __construct()

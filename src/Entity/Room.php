@@ -27,7 +27,6 @@ class Room
     #[ORM\Column]
     private ?int $participants = null;
 
-    #[ORM\OneToMany(mappedBy: 'idRoom', targetEntity: Reservation::class)]
     private Collection $roomReservation;
 
     public function __construct()
