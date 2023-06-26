@@ -23,14 +23,14 @@ class LoginController extends AbstractController
         $user = $userRepository->findOneBy(['mail' => $mail]);
 
         if (!$user) {
-            return $this->json(['message' => 'Email invalide'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['etat' => false, 'message' => 'Email invalide'], Response::HTTP_BAD_REQUEST);
         }
 
         if (!$passwordHasher->isPasswordValid($user, $password)) {
-            return $this->json(['message' => 'Mot de passe invalide'], Response::HTTP_UNAUTHORIZED);
+            return $this->json(['etat' => false, 'message' => 'Mot de passe invalide'], Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->json(['message' => 'Connexion reussie'], Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => 'Connexion reussie'], Response::HTTP_OK);
     }
 
 }
