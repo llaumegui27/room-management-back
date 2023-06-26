@@ -31,7 +31,7 @@ class UserController extends AbstractController
             $responseData[] = [
                 'id' => $user->getId(),
                 'name' => $user->getName(),
-                'email' => $user->getMail(),
+                'mail' => $user->getMail(),
                 'password' => $user->getPassword(),
                 'teacher' => $user->isTeacher(),
                 'admin' => $user->isAdmin(),
@@ -54,7 +54,7 @@ class UserController extends AbstractController
         $responseData[] = [
             'id' => $user->getId(),
             'name' => $user->getName(),
-            'email' => $user->getMail(),
+            'mail' => $user->getMail(),
             'password' => $user->getPassword(),
             'teacher' => $user->isTeacher(),
             'admin' => $user->isAdmin(),
