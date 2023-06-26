@@ -9,10 +9,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class UserController extends AbstractController
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     #[Route('/users', name: 'users', methods: ['GET'])]
     public function users(UserRepository $userRepository): Response
     {
@@ -65,7 +73,8 @@ class UserController extends AbstractController
 
         $user->setName($data['name']);
         $user->setMail($data['mail']);
-        $user->setPassword($data['password']);
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $data['password']);
+        $user->setPassword($hashedPassword);
         $user->setTeacher($data['teacher']);
         $user->setAdmin($data['admin']);
         $user->setSuperAdmin($data['super_admin']);
