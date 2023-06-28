@@ -30,7 +30,7 @@ class LoginController extends AbstractController
             return $this->json(['etat' => false, 'message' => 'Mot de passe invalide'], Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->json(['etat' => true, 'message' => 'Connexion reussie'], Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => 'Connexion reussie', "id" => $user->getId()], Response::HTTP_OK);
     }
 
 }
