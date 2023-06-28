@@ -81,7 +81,13 @@ class UserController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        return $this->json($user, Response::HTTP_OK);
+        
+        // return $this->json($user, Response::HTTP_OK);
+        if ($user->getId()) {
+            return $this->json(['etat' => true, 'message' => 'Inscription réussie'], Response::HTTP_OK);
+        } else {
+            return $this->json(['etat' => false, 'message' => 'Inscription échouée'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
     }
 
