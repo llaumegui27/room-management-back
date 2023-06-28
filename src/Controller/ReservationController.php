@@ -31,7 +31,8 @@ class ReservationController extends AbstractController
                 'date_heure_fin' => $reservation->getDateHeureFin(),
                 'id_user_id' => $reservation->getIdUser()->getId(),
                 'id_room_id' => $reservation->getIdRoom()->getId(),
-                'etat' => $reservation->isEtat()
+                'etat' => $reservation->isEtat(),
+                'commentaire' => $reservation->getCommentaire()
             ];
         }
         return $this->json($responseData);
@@ -53,7 +54,9 @@ class ReservationController extends AbstractController
             'date_heure_fin' => $reservation->getDateHeureFin(),
             'id_user_id' => $reservation->getIdUser()->getId(),
             'id_room_id' => $reservation->getIdRoom()->getId(),
-            'etat' => $reservation->isEtat()
+            'etat' => $reservation->isEtat(),
+            'commentaire' => $reservation->getCommentaire()
+
         ];
 
         return $this->json($responseData);
@@ -69,7 +72,7 @@ class ReservationController extends AbstractController
 
         $idUser = $entityManager->getRepository(User::class)->find($data['id_user_id']);
         $idRoom = $entityManager->getRepository(Room::class)->find($data['id_room_id']);
-
+ 
         $dateHeureDebut = new DateTimeImmutable($data['date_heure_debut']);
         $dateHeureFin = new DateTimeImmutable($data['date_heure_fin']);
 
@@ -78,6 +81,7 @@ class ReservationController extends AbstractController
         $reservation->setDateHeureDebut($dateHeureDebut);
         $reservation->setDateHeureFin($dateHeureFin);
         $reservation->setEtat($data['etat']);
+        $reservation->setCommentaire($data['commentaire']);
 
         $entityManager->persist($reservation);
         $entityManager->flush();
@@ -126,6 +130,7 @@ class ReservationController extends AbstractController
         $reservation->setDateHeureDebut($dateHeureDebut);
         $reservation->setDateHeureFin($dateHeureFin);
         $reservation->setEtat($data['etat']);
+        $reservation->setCommentaire($data['commentaire']);
 
         $entityManager->flush();
 
