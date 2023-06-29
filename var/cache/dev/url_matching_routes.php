@@ -19,6 +19,7 @@ return [
         '/add-reservation' => [[['_route' => 'add-reservation', '_controller' => 'App\\Controller\\ReservationController::addReservation'], null, ['POST' => 0], null, false, false, null]],
         '/rooms' => [[['_route' => 'rooms', '_controller' => 'App\\Controller\\RoomController::rooms'], null, ['GET' => 0], null, false, false, null]],
         '/add-room' => [[['_route' => 'add-room', '_controller' => 'App\\Controller\\RoomController::addRoom'], null, ['POST' => 0], null, false, false, null]],
+        '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\UserController::index'], null, null, null, false, false, null]],
         '/users' => [[['_route' => 'users', '_controller' => 'App\\Controller\\UserController::users'], null, ['GET' => 0], null, false, false, null]],
         '/add-user' => [[['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::addUser'], null, ['POST' => 0], null, false, false, null]],
     ],

@@ -27,6 +27,7 @@ return [
     'add-room' => [[], ['_controller' => 'App\\Controller\\RoomController::addRoom'], [], [['text', '/add-room']], [], [], []],
     'delete_room' => [['id'], ['_controller' => 'App\\Controller\\RoomController::deleteRoom'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/delete-room']], [], [], []],
     'update_room' => [['id'], ['_controller' => 'App\\Controller\\RoomController::updateRoom'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/update-room']], [], [], []],
+    'index' => [[], ['_controller' => 'App\\Controller\\UserController::index'], [], [['text', '/']], [], [], []],
     'users' => [[], ['_controller' => 'App\\Controller\\UserController::users'], [], [['text', '/users']], [], [], []],
     'user' => [['id'], ['_controller' => 'App\\Controller\\UserController::userById'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
     'add_user' => [[], ['_controller' => 'App\\Controller\\UserController::addUser'], [], [['text', '/add-user']], [], [], []],
