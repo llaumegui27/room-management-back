@@ -85,8 +85,14 @@ class ReservationController extends AbstractController
 
         $entityManager->persist($reservation);
         $entityManager->flush();
-        return $this->json($reservation, Response::HTTP_OK);
+        // return $this->json($reservation, Response::HTTP_OK);
         //return new JsonResponse('success');
+
+         if ($reservation->getId()) {
+            return $this->json(['etat' => true, 'message' => 'Réservation enregistré'], Response::HTTP_OK);
+        } else {
+            return $this->json(['etat' => false, 'message' => 'Réservation échouée'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     #[Route('/delete-reservation/{id}', name: 'delete_reservation', methods: ['DELETE'])]
