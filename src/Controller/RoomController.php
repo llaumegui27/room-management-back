@@ -83,13 +83,14 @@ class RoomController extends AbstractController
         $room = $roomRepository->find($id);
 
         if (!$room) {
-            throw $this->createNotFoundException('Salle introuvable.');
+            return $this->json(['etat' => false, 'message' => 'Salle introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $entityManager->remove($room);
         $entityManager->flush();
 
-        return $this->json(['message' => "Salle : $id supprimé."], Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Salle supprimé avec l'id : $id"], Response::HTTP_OK);
+        
     }
 
     #[Route('/update-room/{id}', name: 'update_room', methods: ['PUT'])]
