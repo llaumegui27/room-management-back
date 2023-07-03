@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
+use App\Entity\Room;
+use App\Repository\RoomRepository;
 use App\Entity\Reservation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -146,27 +148,31 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}/reservations', name: 'user_reservations', methods: ['GET'])]
-    public function userReservations(UserRepository $userRepository, ReservationRepository $reservationRepository, $id): Response
-    {
-        $user = $userRepository->find($id);
+    public function userReservations(
+            UserRepository $userRepository,
+            ReservationRepository $reservationRepository,
+            RoomRepository $roomRepository,
+            $id
+        ): Response {
+            $user = $userRepository->find($id);
 
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No user found with id : '.$id
-            );
-        }
+            if (!$user) {
+                throw $this->createNotFoundException(
+                    'No user found with id: '.$id
+                );
+            }
 
         $reservations = $reservationRepository->findBy(['idUser' => $user]);
 
         $responseData = [];
 
         foreach ($reservations as $reservation) {
+            $room = $roomRepository->find($reservation->getIdRoom());
             $responseData[] = [
                 'id' => $reservation->getId(),
                 'date_heure_debut' => $reservation->getDateHeureDebut(),
                 'date_heure_fin' => $reservation->getDateHeureFin(),
-                'id_user_id' => $reservation->getIdUser()->getId(),
-                'id_room_id' => $reservation->getIdRoom()->getId(),
+                'room_name' => $room->getName(),
                 'etat' => $reservation->isEtat(),
                 'commentaire' => $reservation->getCommentaire()
             ];
@@ -174,5 +180,6 @@ class UserController extends AbstractController
 
         return $this->json($responseData);
     }
+
 
 }
