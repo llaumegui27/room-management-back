@@ -149,23 +149,23 @@ class UserController extends AbstractController
 
     #[Route('/user/{id}/reservations', name: 'user_reservations', methods: ['GET'])]
     public function userReservations(
-            UserRepository $userRepository,
-            ReservationRepository $reservationRepository,
-            RoomRepository $roomRepository,
-            $id
-        ): Response {
-            $user = $userRepository->find($id);
-
-            if (!$user) {
-                throw $this->createNotFoundException(
-                    'No user found with id: '.$id
-                );
-            }
-
+        UserRepository $userRepository,
+        ReservationRepository $reservationRepository,
+        RoomRepository $roomRepository,
+        $id
+    ): Response {
+        $user = $userRepository->find($id);
+    
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found with id: ' . $id
+            );
+        }
+    
         $reservations = $reservationRepository->findBy(['idUser' => $user]);
-
+    
         $responseData = [];
-
+    
         foreach ($reservations as $reservation) {
             $room = $roomRepository->find($reservation->getIdRoom());
             $responseData[] = [
@@ -173,13 +173,15 @@ class UserController extends AbstractController
                 'date_heure_debut' => $reservation->getDateHeureDebut(),
                 'date_heure_fin' => $reservation->getDateHeureFin(),
                 'room_name' => $room->getName(),
+                'user_name' => $reservation->getIdUser()->getName(),
                 'etat' => $reservation->isEtat(),
                 'commentaire' => $reservation->getCommentaire()
             ];
         }
-
+    
         return $this->json($responseData);
     }
+    
 
 
 }
