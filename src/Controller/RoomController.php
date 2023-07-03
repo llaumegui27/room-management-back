@@ -102,7 +102,7 @@ class RoomController extends AbstractController
         $room = $roomRepository->find($id);
 
         if (!$room) {
-            throw $this->createNotFoundException('Salle introuvable.');
+            return $this->json(['etat' => false, 'message' => 'Salle introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $data = json_decode($request->getContent(), true);
@@ -114,6 +114,6 @@ class RoomController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($room, Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Salle modifié avec l'id : $id"], Response::HTTP_OK);
     }
 }
