@@ -19,22 +19,28 @@ use DateTimeImmutable;
 class ReservationController extends AbstractController
 {
     #[Route('/reservations', name: 'reservations')]
-    public function reservations(ReservationRepository $reservationRepository): Response
-    {
+    public function reservations(
+        ReservationRepository $reservationRepository,
+        UserRepository $userRepository
+    ): Response {
         $reservations = $reservationRepository->findAll();
         $responseData = [];
 
         foreach ($reservations as $reservation) {
+            $user = $userRepository->find($reservation->getIdUser());
+
             $responseData[] = [
                 'id' => $reservation->getId(),
                 'date_heure_debut' => $reservation->getDateHeureDebut(),
                 'date_heure_fin' => $reservation->getDateHeureFin(),
-                'id_user_id' => $reservation->getIdUser()->getId(),
+                'id_user_id' => $user->getId(),
                 'id_room_id' => $reservation->getIdRoom()->getId(),
                 'etat' => $reservation->isEtat(),
-                'commentaire' => $reservation->getCommentaire()
+                'commentaire' => $reservation->getCommentaire(),
+                'user_name' => $user->getName(),
             ];
         }
+
         return $this->json($responseData);
     }
 

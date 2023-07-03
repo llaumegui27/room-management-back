@@ -399,7 +399,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.2vYU.t7"/>
+      <argument type="service" id=".service_locator.gahc3nx"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2958,7 +2958,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.2vYU.t7"/>
+      <argument type="service" id=".service_locator.gahc3nx"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -6886,6 +6886,13 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.QTcIfgw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="reservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.caJHb8S" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6918,14 +6925,14 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.2vYU.t7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.gahc3nx" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\LoginController::login" type="service_closure" id=".service_locator.vzUXUAi"/>
         <argument key="App\Controller\ReservationController::addReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController::deleteReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController::reservationById" type="service_closure" id=".service_locator.caJHb8S"/>
-        <argument key="App\Controller\ReservationController::reservations" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::reservations" type="service_closure" id=".service_locator.QTcIfgw"/>
         <argument key="App\Controller\ReservationController::updateReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController::addRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController::deleteRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -6946,7 +6953,7 @@
         <argument key="App\Controller\ReservationController:addReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController:deleteReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ReservationController:reservationById" type="service_closure" id=".service_locator.caJHb8S"/>
-        <argument key="App\Controller\ReservationController:reservations" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:reservations" type="service_closure" id=".service_locator.QTcIfgw"/>
         <argument key="App\Controller\ReservationController:updateReservation" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController:addRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\RoomController:deleteRoom" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -8923,7 +8930,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.2vYU.t7"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.gahc3nx"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8946,7 +8953,7 @@
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
     <service id=".service_locator.BW0.tUC" alias=".service_locator.vzUXUAi"/>
     <service id=".service_locator.yraUhRz" alias=".service_locator.wEzkL7p"/>
-    <service id=".service_locator.2ALjpI4" alias=".service_locator.2vYU.t7"/>
+    <service id=".service_locator.KJ0kD3E" alias=".service_locator.gahc3nx"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>
@@ -8970,6 +8977,7 @@
     <service id="security.event_dispatcher.main" alias="debug.security.event_dispatcher.main"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
     <service id=".service_locator.VZEzlWe" alias=".service_locator.vzUXUAi"/>
+    <service id=".service_locator.4MhJUNM" alias=".service_locator.QTcIfgw"/>
     <service id=".service_locator.LuS44bc" alias=".service_locator.caJHb8S"/>
     <service id=".service_locator.eQ296SW" alias=".service_locator.o6sN0hZ"/>
     <service id=".service_locator.WXova3H" alias=".service_locator.0.E_r2b"/>
