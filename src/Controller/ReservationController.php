@@ -21,13 +21,16 @@ class ReservationController extends AbstractController
     #[Route('/reservations', name: 'reservations')]
     public function reservations(
         ReservationRepository $reservationRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        RoomRepository $roomRepository
     ): Response {
         $reservations = $reservationRepository->findAll();
         $responseData = [];
 
         foreach ($reservations as $reservation) {
             $user = $userRepository->find($reservation->getIdUser());
+            $room = $roomRepository->find($reservation->getIdRoom());
+
 
             $responseData[] = [
                 'id' => $reservation->getId(),
@@ -38,6 +41,7 @@ class ReservationController extends AbstractController
                 'etat' => $reservation->isEtat(),
                 'commentaire' => $reservation->getCommentaire(),
                 'user_name' => $user->getName(),
+                'room_name' => $room->getName(),
             ];
         }
 
