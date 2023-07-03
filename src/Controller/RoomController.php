@@ -65,7 +65,12 @@ class RoomController extends AbstractController
 
         $entityManager->persist($room);
         $entityManager->flush();
-        return $this->json($room, Response::HTTP_OK);
+        // return $this->json($room, Response::HTTP_OK);
+        if ($room->getId()) {
+            return $this->json(['etat' => true, 'message' => 'Salle enregistré'], Response::HTTP_OK);
+        } else {
+            return $this->json(['etat' => false, 'message' => 'Échec de l\'ajout de la salle'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
     }
 

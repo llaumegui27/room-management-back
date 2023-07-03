@@ -88,7 +88,7 @@ class ReservationController extends AbstractController
         // return $this->json($reservation, Response::HTTP_OK);
         //return new JsonResponse('success');
 
-         if ($reservation->getId()) {
+        if ($reservation->getId()) {
             return $this->json(['etat' => true, 'message' => 'Réservation enregistré'], Response::HTTP_OK);
         } else {
             return $this->json(['etat' => false, 'message' => 'Réservation échouée'], Response::HTTP_INTERNAL_SERVER_ERROR);
