@@ -59,7 +59,10 @@ return [
                         .')'
                         .'|user/([^/]++)(*:388)'
                     .')'
-                    .'|ser/([^/]++)(*:409)'
+                    .'|ser/([^/]++)(?'
+                        .'|(*:412)'
+                        .'|/reservations(*:433)'
+                    .')'
                 .')'
             .')/?$}sDu',
     ],
@@ -79,8 +82,9 @@ return [
         346 => [[['_route' => 'update-reservation', '_controller' => 'App\\Controller\\ReservationController::updateReservation'], ['id'], ['PUT' => 0], null, false, true, null]],
         366 => [[['_route' => 'update_room', '_controller' => 'App\\Controller\\RoomController::updateRoom'], ['id'], ['PUT' => 0], null, false, true, null]],
         388 => [[['_route' => 'update_user', '_controller' => 'App\\Controller\\UserController::updateUser'], ['id'], ['PUT' => 0], null, false, true, null]],
-        409 => [
-            [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::userById'], ['id'], ['GET' => 0], null, false, true, null],
+        412 => [[['_route' => 'user', '_controller' => 'App\\Controller\\UserController::userById'], ['id'], ['GET' => 0], null, false, true, null]],
+        433 => [
+            [['_route' => 'user_reservations', '_controller' => 'App\\Controller\\UserController::userReservations'], ['id'], ['GET' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

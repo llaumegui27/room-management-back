@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\ReservationRepository;
+use App\Entity\Reservation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -142,4 +144,35 @@ class UserController extends AbstractController
 
         return $this->json($user, Response::HTTP_OK);
     }
+
+    #[Route('/user/{id}/reservations', name: 'user_reservations', methods: ['GET'])]
+    public function userReservations(UserRepository $userRepository, ReservationRepository $reservationRepository, $id): Response
+    {
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found with id : '.$id
+            );
+        }
+
+        $reservations = $reservationRepository->findBy(['idUser' => $user]);
+
+        $responseData = [];
+
+        foreach ($reservations as $reservation) {
+            $responseData[] = [
+                'id' => $reservation->getId(),
+                'date_heure_debut' => $reservation->getDateHeureDebut(),
+                'date_heure_fin' => $reservation->getDateHeureFin(),
+                'id_user_id' => $reservation->getIdUser()->getId(),
+                'id_room_id' => $reservation->getIdRoom()->getId(),
+                'etat' => $reservation->isEtat(),
+                'commentaire' => $reservation->getCommentaire()
+            ];
+        }
+
+        return $this->json($responseData);
+    }
+
 }

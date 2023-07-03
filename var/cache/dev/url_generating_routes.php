@@ -33,4 +33,5 @@ return [
     'add_user' => [[], ['_controller' => 'App\\Controller\\UserController::addUser'], [], [['text', '/add-user']], [], [], []],
     'delete_user' => [['id'], ['_controller' => 'App\\Controller\\UserController::deleteUser'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/delete-user']], [], [], []],
     'update_user' => [['id'], ['_controller' => 'App\\Controller\\UserController::updateUser'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/update-user']], [], [], []],
+    'user_reservations' => [['id'], ['_controller' => 'App\\Controller\\UserController::userReservations'], [], [['text', '/reservations'], ['variable', '/', '[^/]++', 'id', true], ['text', '/user']], [], [], []],
 ];
