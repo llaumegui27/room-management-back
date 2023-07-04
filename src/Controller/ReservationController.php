@@ -132,7 +132,7 @@ class ReservationController extends AbstractController
         $reservation = $entityManager->getRepository(Reservation::class)->find($id);
 
         if (!$reservation) {
-            throw $this->createNotFoundException('Réservation non trouvée.');
+            return $this->json(['etat' => false, 'message' => 'Réservation introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $idUser = $entityManager->getRepository(User::class)->find($data['id_user_id']);
@@ -150,7 +150,7 @@ class ReservationController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($reservation, Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Réservation avec l'id $id modifié"], Response::HTTP_OK);
     }
 
 }
