@@ -112,13 +112,13 @@ class UserController extends AbstractController
         $user = $userRepository->find($id);
 
         if (!$user) {
-            throw $this->createNotFoundException('Utilisateur introuvable.');
+            return $this->json(['etat' => false, 'message' => 'Utilisateur introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return $this->json(['message' => "Utilisateur : $id supprimé."], Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Utilisateur : $id supprimé."], Response::HTTP_OK);
     }
 
     #[Route('/update-user/{id}', name: 'update_user', methods: ['PUT'])]
@@ -130,21 +130,22 @@ class UserController extends AbstractController
         $user = $userRepository->find($id);
 
         if (!$user) {
-            throw $this->createNotFoundException('Utilisateur introuvable.');
+            return $this->json(['etat' => false, 'message' => 'Utilisateur introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $data = json_decode($request->getContent(), true);
 
         $user->setName($data['name']);
         $user->setMail($data['mail']);
-        $user->setPassword($data['password']);
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $data['password']);
+        $user->setPassword($hashedPassword);        
         $user->setTeacher($data['teacher']);
         $user->setAdmin($data['admin']);
         $user->setSuperAdmin($data['super_admin']);
 
         $entityManager->flush();
 
-        return $this->json($user, Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Utilisateur : $id modifiée."], Response::HTTP_OK);
     }
 
     #[Route('/user/{id}/reservations', name: 'user_reservations', methods: ['GET'])]
