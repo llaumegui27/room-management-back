@@ -793,3 +793,10 @@ ec19a2,127.0.0.1,GET,http://10.0.2.2:8000/reservations,1688475755,,200
 a1d0a0,127.0.0.1,PUT,http://127.0.0.1:8000/update-reservation/4,1688476231,,200
 ff73b0,127.0.0.1,PUT,http://127.0.0.1:8000/update-reservation/4,1688476347,,200
 2a32c2,127.0.0.1,PUT,http://127.0.0.1:8000/update-reservation/25,1688476361,,400
+799c51,127.0.0.1,GET,http://127.0.0.1:8000/reservations,1688477057,,200
+2ae58c,127.0.0.1,GET,http://127.0.0.1:8000/reservation/4,1688477427,,200
+9e6d86,127.0.0.1,PUT,http://10.0.2.2:8000/update-reservation/14,1688477614,,200
+bb9a51,127.0.0.1,PUT,http://10.0.2.2:8000/update-reservation/12,1688477657,,200
+81d6b3,127.0.0.1,DELETE,http://127.0.0.1:8000/delete-reservation/1,1688477832,,200
+481c5e,127.0.0.1,DELETE,http://127.0.0.1:8000/delete-reservation/2,1688477901,,200
+213cf5,127.0.0.1,DELETE,http://127.0.0.1:8000/delete-reservation/25,1688477918,,400

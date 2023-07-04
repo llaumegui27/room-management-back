@@ -114,13 +114,13 @@ class ReservationController extends AbstractController
         $reservation = $reservationRepository->find($id);
 
         if (!$reservation) {
-            throw $this->createNotFoundException('Réservation introuvable.');
+            return $this->json(['etat' => false, 'message' => 'Réservation introuvable'], Response::HTTP_BAD_REQUEST);
         }
 
         $entityManager->remove($reservation);
         $entityManager->flush();
 
-        return $this->json(['message' => "Réservation : $id supprimé."], Response::HTTP_OK);
+        return $this->json(['etat' => true, 'message' => "Réservation : $id supprimé."], Response::HTTP_OK);
     }
 
     #[Route('/update-reservation/{id}', name: 'update-reservation', methods: ['PUT'])]
