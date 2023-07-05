@@ -137,8 +137,7 @@ class UserController extends AbstractController
 
         $user->setName($data['name']);
         $user->setMail($data['mail']);
-        $hashedPassword = $this->passwordHasher->hashPassword($user, $data['password']);
-        $user->setPassword($hashedPassword);        
+        $user->setPassword($data['password']);        
         $user->setTeacher($data['teacher']);
         $user->setAdmin($data['admin']);
         $user->setSuperAdmin($data['super_admin']);
