@@ -36,7 +36,7 @@ class ReservationController extends AbstractController
                 'id' => $reservation->getId(),
                 'date_heure_debut' => $reservation->getDateHeureDebut(),
                 'date_heure_fin' => $reservation->getDateHeureFin(),
-                'id_user_id' => $user->getId(),
+                'id_user_id' => $reservation->getIdUser()->getId(),
                 'id_room_id' => $reservation->getIdRoom()->getId(),
                 'etat' => $reservation->isEtat(),
                 'commentaire' => $reservation->getCommentaire(),
