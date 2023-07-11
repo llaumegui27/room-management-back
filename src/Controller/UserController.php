@@ -29,7 +29,7 @@ class UserController extends AbstractController
     public function index(): Response
     {
         return $this->render('user/index.html.twig', [
-            'controller_name' => 'DefaultController',
+            'controller_name' => 'API Room Manager Work',
         ]);
     }
 
